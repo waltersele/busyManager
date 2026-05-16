@@ -55,3 +55,7 @@ El `organization_id` y `business_id` vienen del JWT del módulo; el SDK no permi
 4. Gestión — voz-gestion, presupuestos-wa, seguimiento-automatico, asignacion-zona
 5. Monitorización — web-uptime, monitor-ssl, velocidad-carga, caida-trafico
 6. Visual — digital-signage, video-local, menu-dinamico (en desarrollo)
+
+## Documentación para alumnos
+
+Especificaciones por módulo, contrato SDK y checklists: [docs/students/README.md](students/README.md).

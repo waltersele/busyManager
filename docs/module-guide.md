@@ -1,50 +1,56 @@
-# Guía: crear un módulo alumno
+# Guía rápida: módulos alumno
 
-## Reglas
+Documentación completa para alumnos: **[docs/students/README.md](students/README.md)**
+
+## Reglas (resumen)
 
 1. **Nunca** accedas a la base de datos de La Matriz.
-2. Usa siempre `@busymanager/matrix-sdk`.
-3. Autentícate con la API key que genera el dashboard al activar el módulo.
+2. Usa `@busymanager/matrix-sdk` con `MODULE_API_KEY`.
+3. Credenciales de terceros vía `matrix.connections.get()`, no en tu `.env` de producción.
+4. IA solo tras `matrix.tokens.check()` + `matrix.tokens.consume()`.
 
-## Flujo
+## Activación
 
-1. El `org_admin` activa tu módulo en **Dashboard → Módulos**.
-2. Copia la `MODULE_API_KEY` (solo se muestra una vez).
-3. En tu app, configura `MATRIX_API_URL` y `MODULE_API_KEY`.
+1. Dashboard → Tienda / Catálogo → **Añadir a mi suite**.
+2. Copia `MODULE_API_KEY` (una sola vez).
+3. Configura `MATRIX_API_URL` y `MODULE_API_KEY` en tu módulo.
 
-## Ejemplo: web-uptime
+## Referencia: web-uptime
 
 ```bash
 cd apps/module-web-uptime
 cp .env.example .env
-# Edita MODULE_API_KEY
 pnpm install
-pnpm check
+pnpm check    # una comprobación
+pnpm start    # cada 5 minutos
 ```
 
-El módulo:
+Lee la URL en `settings.web.url` (Dashboard → Configuración). El código de referencia está en `apps/module-web-uptime/src/check.ts`.
 
-- Verifica suscripción `web-uptime`
-- Lee `monitor_url` de los settings del negocio (configúralo en Dashboard → Negocios)
-- Hace ping HTTP
-- Si falla: `matrix.notify()` + `matrix.webhooks.emit('site.down', ...)`
-
-## SDK — métodos disponibles
+## SDK (métodos principales)
 
 | Método | Uso |
 |--------|-----|
 | `matrix.auth.check()` | Contexto org/negocio/settings |
 | `matrix.subscriptions.check(slug)` | ¿Módulo activo? |
-| `matrix.connections.get('gemini')` | Credenciales (hereda org) |
+| `matrix.connections.get(provider)` | Credenciales |
 | `matrix.tokens.check(n)` / `consume(...)` | Presupuesto IA |
 | `matrix.leads.create(...)` | Lead Workbench |
 | `matrix.webhooks.emit(event, data)` | Webhooks del negocio |
 | `matrix.notify(channel, { title, body })` | Alertas |
 
-## Scheduler
+Detalle: [docs/students/03-contrato-matriz.md](students/03-contrato-matriz.md).
 
-```bash
-pnpm start   # ejecuta check cada 5 min
-```
+## Módulos del curso
 
-En producción usa cron, Laravel Scheduler o un worker en tu PaaS.
+| Slug | Documentación |
+|------|----------------|
+| `web-uptime` | [modules/web-uptime.md](students/modules/web-uptime.md) |
+| `resenas-gmb` | [modules/resenas-gmb.md](students/modules/resenas-gmb.md) |
+| `whatsapp-guardia` | [modules/whatsapp-guardia.md](students/modules/whatsapp-guardia.md) |
+| `voz-gestion` | [modules/voz-gestion.md](students/modules/voz-gestion.md) |
+| `seo-pipeline` | [modules/seo-pipeline.md](students/modules/seo-pipeline.md) |
+| `monitor-menciones` | [modules/monitor-menciones.md](students/modules/monitor-menciones.md) |
+| `digital-signage` | [modules/digital-signage.md](students/modules/digital-signage.md) |
+| `menu-dinamico` | [modules/menu-dinamico.md](students/modules/menu-dinamico.md) |
+| `video-local` | [modules/video-local.md](students/modules/video-local.md) |

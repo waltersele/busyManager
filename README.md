@@ -19,6 +19,14 @@ Al clonar en otro PC, abre el proyecto en Cursor: la regla en `.cursor/rules/` y
 | Colas | Redis + Laravel Queues |
 | Email dev | Mailpit |
 
+## Documentación para alumnos
+
+Guía completa para desarrollar módulos (reseñas GMB, WhatsApp Guardia, SEO, signage, etc.):
+
+**[docs/students/README.md](docs/students/README.md)**
+
+Resumen rápido: [docs/module-guide.md](docs/module-guide.md)
+
 ## Estructura
 
 ```
@@ -28,7 +36,7 @@ apps/module-web-uptime/ — Módulo referencia (monitor web)
 packages/matrix-sdk/    — SDK TypeScript
 packages/api-contracts/
 docker/                 — MySQL, Redis, Mailpit, API
-docs/                   — Arquitectura, guía módulos, contexto Cursor
+docs/                   — Arquitectura, guía módulos, alumnos, contexto Cursor
 .cursor/rules/          — Reglas persistentes para el agente
 ```
 
