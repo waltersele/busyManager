@@ -1,0 +1,4 @@
+packages:
+  - "packages/*"
+  - "apps/matrix-web"
+  - "apps/module-web-uptime"

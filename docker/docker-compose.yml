@@ -1,0 +1,85 @@
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: busymanager
+      MYSQL_USER: busymanager
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+  matrix-api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.api
+    working_dir: /var/www/apps/matrix-api
+    volumes:
+      - ..:/var/www
+    ports:
+      - "8080:8080"
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "true"
+      APP_KEY: base64:YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXoxMjM0NTY=
+      DB_HOST: mysql
+      DB_DATABASE: busymanager
+      DB_USERNAME: busymanager
+      DB_PASSWORD: secret
+      REDIS_HOST: redis
+      MAIL_HOST: mailpit
+      MAIL_PORT: 1025
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    command: >
+      sh -c "mkdir -p bootstrap/cache storage/framework/{cache,sessions,views} storage/logs
+      && chmod -R 777 bootstrap/cache storage
+      && composer install --no-interaction --prefer-dist
+      && php artisan config:clear
+      && php artisan migrate --force
+      && php artisan db:seed --force
+      && php artisan serve --host=0.0.0.0 --port=8080"
+
+  queue:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.api
+    working_dir: /var/www/apps/matrix-api
+    volumes:
+      - ..:/var/www
+    environment:
+      APP_KEY: base64:YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXoxMjM0NTY=
+      DB_HOST: mysql
+      DB_DATABASE: busymanager
+      DB_USERNAME: busymanager
+      DB_PASSWORD: secret
+      REDIS_HOST: redis
+      MAIL_HOST: mailpit
+      MAIL_PORT: 1025
+    depends_on:
+      - matrix-api
+    command: php artisan queue:work --sleep=3
+
+volumes:
+  mysql_data:

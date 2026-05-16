@@ -1,0 +1,13 @@
+{
+  "name": "busymanager",
+  "private": true,
+  "scripts": {
+    "dev:web": "pnpm --filter @busymanager/matrix-web dev",
+    "build:sdk": "pnpm --filter @busymanager/matrix-sdk build",
+    "build:web": "pnpm --filter @busymanager/matrix-web build",
+    "test:sdk": "pnpm --filter @busymanager/matrix-sdk test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
