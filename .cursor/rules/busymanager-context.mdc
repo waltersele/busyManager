@@ -1,0 +1,29 @@
+---
+description: Contexto BusyManager La Matriz — arquitectura, jerarquía tenant y estado del MVP
+alwaysApply: true
+---
+
+# BusyManager / La Matriz
+
+Lee `docs/cursor/CONTEXTO-PROYECTO.md` al iniciar tareas grandes. Historial de chat: `docs/cursor/chat/`.
+
+## Jerarquía
+
+Agencia → Organización → **Negocio** (módulos, Provider Connections, leads, settings por negocio).
+
+## Convenciones
+
+- Monorepo: `apps/matrix-api` (Laravel), `apps/matrix-web` (Next.js org_admin), módulos en `apps/module-*`, SDK en `packages/matrix-sdk` como `@busymanager/matrix-sdk`.
+- Dashboard actual = panel cliente org_admin, no superadmin.
+- API base dev: `http://localhost:8080`. MySQL Docker en puerto host **3307**.
+- Demo: `orgadmin@karting.demo` / `password`.
+
+## Producto
+
+Módulos pequeños por categoría (Captación, Social, Contenido, Gestión, Infra, Monitorización). Sidebar solo muestra apps **active**; catálogo muestra todas.
+
+## Al implementar
+
+- Reutilizar servicios y patrones existentes en matrix-api; no duplicar auth/tenant en módulos alumno.
+- Settings de negocio vía `BusinessSettingsService` y endpoints `/businesses/{id}/settings`.
+- Mantener coherencia visual del dashboard (tema claro, iconos en `components/icons.tsx`).

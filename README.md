@@ -2,13 +2,19 @@
 
 Plataforma multitenant (Agencia → Organización → Negocio) con API central, SDK para módulos de alumnos y dashboard web.
 
+**Repositorio:** [github.com/waltersele/busyManager](https://github.com/waltersele/busyManager)
+
+## Contexto para Cursor
+
+Al clonar en otro PC, abre el proyecto en Cursor: la regla en `.cursor/rules/` y el resumen en [`docs/cursor/CONTEXTO-PROYECTO.md`](docs/cursor/CONTEXTO-PROYECTO.md) recuperan decisiones de arquitectura y producto. El chat completo está en [`docs/cursor/chat/`](docs/cursor/chat/).
+
 ## Stack
 
 | Capa | Tecnología |
 |------|------------|
 | API / Matriz | Laravel 11, PHP 8.3 |
 | Dashboard | Next.js 15, TypeScript |
-| Módulos alumno | Laravel + `@busymanager/matrix-sdk` |
+| Módulos alumno | Laravel / workers + `@busymanager/matrix-sdk` |
 | BD | MySQL 8 |
 | Colas | Redis + Laravel Queues |
 | Email dev | Mailpit |
@@ -16,25 +22,65 @@ Plataforma multitenant (Agencia → Organización → Negocio) con API central, 
 ## Estructura
 
 ```
-apps/matrix-api/       — API REST La Matriz
-apps/matrix-web/       — Dashboard org_admin
+apps/matrix-api/        — API REST La Matriz
+apps/matrix-web/        — Dashboard org_admin
 apps/module-web-uptime/ — Módulo referencia (monitor web)
-packages/matrix-sdk/   — SDK TypeScript
+packages/matrix-sdk/    — SDK TypeScript
 packages/api-contracts/
-docker/                — MySQL, Redis, Mailpit, API
-docs/                  — Arquitectura y guía módulos
+docker/                 — MySQL, Redis, Mailpit, API
+docs/                   — Arquitectura, guía módulos, contexto Cursor
+.cursor/rules/          — Reglas persistentes para el agente
 ```
 
-## Inicio rápido (Docker)
+## Clonar en otro equipo
 
-```bash
+```powershell
+git clone https://github.com/waltersele/busyManager.git
+cd busyManager
+pnpm install
+```
+
+### 1. Variables de entorno
+
+```powershell
+copy apps\matrix-api\.env.example apps\matrix-api\.env
+copy apps\matrix-web\.env.local.example apps\matrix-web\.env.local
+```
+
+Ajusta en `apps/matrix-api/.env` si no usas Docker (host `127.0.0.1`, puerto `3306`).
+
+### 2. Docker (recomendado en dev)
+
+Requiere [Docker Desktop](https://www.docker.com/products/docker-desktop/) en ejecución.
+
+```powershell
 cd docker
 docker compose up -d
 ```
 
-- API: http://localhost:8080
-- Mailpit UI: http://localhost:8025
-- MySQL: `localhost:3307` (user `busymanager` / `secret`) — puerto 3307 si ya tienes MySQL en 3306
+| Servicio | URL / puerto |
+|----------|----------------|
+| API | http://localhost:8080 |
+| Mailpit | http://localhost:8025 |
+| MySQL | `localhost:3307` — usuario `busymanager`, contraseña `secret` |
+
+La primera vez, dentro del contenedor API o con PHP local:
+
+```powershell
+cd apps\matrix-api
+composer install
+php artisan migrate --seed
+```
+
+### 3. Frontend
+
+Desde la raíz del monorepo:
+
+```powershell
+pnpm dev:web
+```
+
+Dashboard: http://localhost:3000
 
 ### Credenciales demo
 
@@ -43,27 +89,29 @@ docker compose up -d
 | orgadmin@karting.demo | password | org_admin |
 | superadmin@busymanager.local | password | superadmin |
 
-## Desarrollo frontend
+## Sin Docker
 
-```bash
-pnpm install
-cp .env.example apps/matrix-web/.env.local
-pnpm dev:web
+Instala PHP 8.3+, Composer, MySQL y Redis. Configura `apps/matrix-api/.env` y:
+
+```powershell
+cd apps\matrix-api
+composer install
+php artisan migrate --seed
+php artisan serve --port=8080
 ```
 
-Dashboard: http://localhost:3000
+En otra terminal, desde la raíz: `pnpm dev:web`.
 
 ## Módulo web-uptime
 
 Ver [docs/module-guide.md](docs/module-guide.md).
 
-## Sin Docker
+## Validación manual
 
-Instala PHP 8.3+, Composer, MySQL y Redis. Copia `.env.example` a `apps/matrix-api/.env`, ajusta `DB_*` y:
+Checklist en [scripts/e2e-validation.md](scripts/e2e-validation.md).
 
-```bash
-cd apps/matrix-api
-composer install
-php artisan migrate --seed
-php artisan serve --port=8080
+## Scripts
+
+```powershell
+.\scripts\setup.ps1   # ayuda inicial (si está configurado)
 ```
