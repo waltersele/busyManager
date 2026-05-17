@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\LeadWorkbenchService;
 use App\Services\ModuleAuthService;
+use App\Services\ModuleRuntimeService;
 use App\Services\NotificationService;
 use App\Services\ProviderConnectionVault;
 use App\Services\TokenBudgetService;
@@ -147,5 +148,21 @@ class MatrixController extends Controller
         );
 
         return response()->json($alert, 201);
+    }
+
+    public function runtimePublish(Request $request, ModuleRuntimeService $runtime): JsonResponse
+    {
+        $data = $request->validate([
+            'payload' => 'required|array',
+        ]);
+
+        $business = $this->tenant->business;
+        if (! $business || ! $this->tenant->moduleSlug) {
+            return response()->json(['message' => 'Invalid module context'], 403);
+        }
+
+        $runtime->publish($business, $this->tenant->moduleSlug, $data['payload']);
+
+        return response()->json(['ok' => true]);
     }
 }

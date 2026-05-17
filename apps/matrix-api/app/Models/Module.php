@@ -9,13 +9,14 @@ class Module extends Model
 {
     protected $fillable = [
         'slug', 'name', 'category', 'description', 'marketing_description',
-        'is_available', 'is_free', 'price_monthly_cents',
+        'is_available', 'catalog_visible', 'is_free', 'price_monthly_cents',
     ];
 
     protected function casts(): array
     {
         return [
             'is_available' => 'boolean',
+            'catalog_visible' => 'boolean',
             'is_free' => 'boolean',
         ];
     }

@@ -6,6 +6,10 @@ Genera artículos SEO de forma programada (diaria, semanal, quincenal) y los gua
 
 **Categoría:** contenido
 
+## Incluye (catálogo unificado)
+
+Esta app sustituye en el catálogo el módulo retirado **`seo-onpage`**: metadatos on-page (título, descripción, estructura) forman parte del flujo de generación y revisión antes de publicar en WordPress.
+
 ## Requisitos funcionales
 
 1. Scheduler según cadencia configurada.

@@ -47,14 +47,19 @@ Los módulos **no** acceden a MySQL de la Matriz. Usan `@busymanager/matrix-sdk`
 
 El `organization_id` y `business_id` vienen del JWT del módulo; el SDK no permite sobrescribirlos.
 
-## Categorías de módulos (catálogo)
+## Categorías de módulos (catálogo visible)
 
-1. Captación — lead-router, form-builder, form-detector
-2. Social — whatsapp-guardia, resenas-gmb, reputacion-multicanal, monitor-menciones
-3. Contenido — seo-onpage, seo-pipeline, enlaces-rotos, alerta-posicion-seo
-4. Gestión — voz-gestion, presupuestos-wa, seguimiento-automatico, asignacion-zona
-5. Monitorización — web-uptime, monitor-ssl, velocidad-carga, caida-trafico
-6. Visual — digital-signage, video-local, menu-dinamico (en desarrollo)
+Las apps con `catalog_visible = false` no aparecen en Mi suite ni en Configuración → Apps (legado absorbido u ocultas).
+
+| Categoría | Apps visibles |
+|-----------|----------------|
+| **Social** | whatsapp-guardia, resenas-gmb, reputacion-multicanal, monitor-menciones |
+| **Contenido** | seo-pipeline (incl. SEO on-page), enlaces-rotos (incl. alertas de posición) |
+| **Gestión** | voz-gestion |
+| **Monitorización** | web-uptime (disponibilidad + certificado SSL; slug único) |
+| **Visual** | digital-signage, video-local, menu-dinamico (`is_available: false`, próximamente) |
+
+**No en catálogo:** captación; monitor-ssl, seo-onpage, alerta-posicion-seo; presupuestos-wa, seguimiento-automatico, asignacion-zona; velocidad-carga, caida-trafico.
 
 ## Documentación para alumnos
 

@@ -47,6 +47,7 @@ Route::prefix('v1')->group(function () {
         Route::middleware(['org.admin', 'business.context'])->prefix('businesses/{business}')->group(function () {
             Route::get('apps-sidebar', [SubscriptionController::class, 'appsSidebar']);
             Route::get('apps/{moduleSlug}', [SubscriptionController::class, 'showApp']);
+            Route::get('apps/{moduleSlug}/runtime', [SubscriptionController::class, 'appRuntime']);
             Route::get('settings', [BusinessSettingsController::class, 'show']);
             Route::patch('settings', [BusinessSettingsController::class, 'update']);
 
@@ -77,5 +78,6 @@ Route::prefix('v1')->group(function () {
         Route::post('leads/{id}/events', [MatrixController::class, 'leadsEvent']);
         Route::post('webhooks/emit', [MatrixController::class, 'webhooksEmit']);
         Route::post('notify', [MatrixController::class, 'notify']);
+        Route::post('runtime', [MatrixController::class, 'runtimePublish']);
     });
 });

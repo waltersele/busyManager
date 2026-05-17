@@ -68,15 +68,16 @@ Principio: herramientas **pequeñas**, vendibles por separado, que **integradas*
 ### Dashboard (`apps/matrix-web`)
 
 - Tema claro, login dos columnas
-- **AppSidebar**: categorías; solo apps `active` en menú; «Explorar categoría» → catálogo
-- **Configuración** (`/dashboard/settings`): pestañas Negocio, Identidad, Web, Fiscal, Contacto
-- **Tienda** (`/dashboard/catalog`): todas las apps; gratis vs de pago
-- **Landing** (`/dashboard/apps/[slug]`)
+- **AppSidebar**: todas las apps por categoría (activas + inactivas); Configuración como hub único
+- **Configuración** (`/dashboard/settings/*`): Negocio, Apps, Integraciones, Equipo, Tokens IA
+- **Apps** (`/dashboard/settings/apps`): grid `AppDiscoveryCard` sin precios en UI
+- **Por app** (`/dashboard/apps/[slug]`): landing marketing si inactiva; workspace si activa (`web-uptime` con dashboard runtime)
 
 ### SDK y módulo referencia
 
 - `packages/matrix-sdk` — tests vitest
-- `apps/module-web-uptime` — lee `settings.web.url`
+- `apps/module-web-uptime` — incidencias, site.up/down, `runtime.publish`; gratis en catálogo
+- API `module_runtime_snapshots` + `GET .../apps/{slug}/runtime`
 
 ### Docker (`docker/`)
 
@@ -95,9 +96,10 @@ Principio: herramientas **pequeñas**, vendibles por separado, que **integradas*
 |------|------|
 | Rutas API | `apps/matrix-api/routes/api.php` |
 | Sidebar | `apps/matrix-web/src/components/AppSidebar.tsx` |
-| Settings | `apps/matrix-web/src/app/dashboard/settings/page.tsx` |
-| Catálogo | `apps/matrix-web/src/app/dashboard/catalog/page.tsx` |
-| Landing app | `apps/matrix-web/src/app/dashboard/apps/[slug]/page.tsx` |
+| Settings hub | `apps/matrix-web/src/app/dashboard/settings/` |
+| Apps grid | `apps/matrix-web/src/app/dashboard/settings/apps/page.tsx` |
+| App pages | `apps/matrix-web/src/app/dashboard/apps/[slug]/page.tsx` |
+| Web uptime UI | `apps/matrix-web/src/components/apps/WebUptimeDashboard.tsx` |
 | Compose | `docker/docker-compose.yml` |
 | E2E manual | `scripts/e2e-validation.md` |
 

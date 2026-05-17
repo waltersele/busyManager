@@ -1,8 +1,12 @@
-# Módulo: Web caída (`web-uptime`)
+# Módulo: Monitor web y SSL (`web-uptime`)
 
 ## Resumen y valor PYME
 
-Comprueba cada pocos minutos que la web del negocio responde. Si cae, avisa al responsable por email y WhatsApp con la hora exacta del fallo. Cuando vuelve, notifica la recuperación y el tiempo total de indisponibilidad. Mantiene historial de incidencias consultable desde el panel del módulo.
+Comprueba cada pocos minutos que la web del negocio responde y revisa el certificado SSL de la URL configurada. Si la web cae, avisa al responsable por email con la hora exacta del fallo; si el SSL caduca en menos de 30 días o ya ha caducado, envía aviso preventivo. Cuando la web se recupera, notifica la duración total de la indisponibilidad. Mantiene historial de incidencias y estado SSL en el panel (`ssl_expires_at`, `ssl_days_remaining`, `ssl_ok` vía `matrix.runtime.publish`).
+
+## Incluye (catálogo unificado)
+
+Sustituye en el catálogo el módulo retirado **`monitor-ssl`**. No crear slug `monitor-ssl`; toda la lógica SSL vive bajo `web-uptime`.
 
 **Categoría:** monitorización  
 **Referencia implementada:** [`apps/module-web-uptime`](../../../apps/module-web-uptime)
@@ -14,6 +18,9 @@ Comprueba cada pocos minutos que la web del negocio responde. Si cae, avisa al r
 3. Canales de alerta: **email** y **WhatsApp** al responsable.
 4. Al recuperarse: segunda notificación con **duración total** de la caída.
 5. Historial de incidencias (inicio, fin, duración, código HTTP) en BD del módulo.
+6. Comprobar caducidad del certificado SSL de `settings.web.url` (HTTPS).
+7. Alertas si el SSL caduca en menos de 30 días o ya está caducado.
+8. Publicar en runtime: `ssl_expires_at`, `ssl_days_remaining`, `ssl_ok`.
 
 ## Reglas de seguridad / negocio
 

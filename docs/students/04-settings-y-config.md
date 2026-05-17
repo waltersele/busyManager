@@ -107,4 +107,4 @@ Credenciales de terceros **no** van en `settings`. Van en Integraciones y se lee
 
 ## Siguiente paso
 
-[05 — Panel y experiencia de usuario](05-panel-y-ux.md)
+[05 — Panel y experiencia de usuario](05-panel-y-ux.md) → [06 — Guía de estilos](06-guia-estilos.md)

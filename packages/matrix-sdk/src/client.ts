@@ -98,6 +98,10 @@ export function createMatrixClient(options: MatrixClientOptions) {
     },
     notify: (channel: string, msg: Omit<NotifyPayload, 'channel'>) =>
       request<unknown>('POST', '/notify', { channel, ...msg }),
+    runtime: {
+      publish: (payload: Record<string, unknown>) =>
+        request<{ ok: boolean }>('POST', '/runtime', { payload }),
+    },
   };
 }
 

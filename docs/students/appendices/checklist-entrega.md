@@ -39,6 +39,12 @@ Usa esta lista antes de entregar tu módulo. El profesor marcará cada ítem.
 - [ ] README del módulo: variables de entorno, comandos, escenario de prueba
 - [ ] Enlace a la ficha `docs/students/modules/{slug}.md` actualizada si cambiaste el contrato de settings
 
+## Panel web (si aplica: resenas-gmb, seo-pipeline, etc.)
+
+- [ ] UI alineada con [06-guia-estilos.md](../06-guia-estilos.md) (tokens, botones, badges de estado)
+- [ ] Botón de publicar deshabilitado hasta cumplir reglas de aprobación del módulo
+- [ ] Mensajes de error claros (sin conexión, sin tokens IA, módulo desactivado)
+
 ## Demo sugerida (5 min)
 
 1. Login `orgadmin@karting.demo` → negocio Valencia.

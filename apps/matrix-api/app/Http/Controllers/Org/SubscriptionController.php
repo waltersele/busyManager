@@ -7,6 +7,7 @@ use App\Models\Business;
 use App\Models\BusinessSubscription;
 use App\Models\Module;
 use App\Services\ModuleAuthService;
+use App\Services\ModuleRuntimeService;
 use App\Support\TenantContext;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,7 +21,9 @@ class SubscriptionController extends Controller
 
     public function catalog(): JsonResponse
     {
-        return response()->json(['data' => Module::orderBy('category')->get()]);
+        return response()->json([
+            'data' => Module::where('catalog_visible', true)->orderBy('category')->orderBy('name')->get(),
+        ]);
     }
 
     public function appsSidebar(Business $business): JsonResponse
@@ -33,7 +36,10 @@ class SubscriptionController extends Controller
             ->get()
             ->keyBy(fn ($s) => $s->module->slug);
 
-        $modules = Module::orderBy('category')->orderBy('name')->get();
+        $modules = Module::where('catalog_visible', true)
+            ->orderBy('category')
+            ->orderBy('name')
+            ->get();
 
         $categories = [];
         foreach ($modules as $module) {
@@ -45,10 +51,10 @@ class SubscriptionController extends Controller
             $categories[$cat][] = $this->formatApp($module, $sub);
         }
 
-        $categoryOrder = ['captacion', 'social', 'contenido', 'gestion', 'monitorizacion', 'visual'];
+        $categoryOrder = ['social', 'contenido', 'gestion', 'monitorizacion', 'visual'];
         $ordered = [];
         foreach ($categoryOrder as $key) {
-            if (isset($categories[$key])) {
+            if (! empty($categories[$key])) {
                 $ordered[] = [
                     'id' => $key,
                     'apps' => $categories[$key],
@@ -79,6 +85,15 @@ class SubscriptionController extends Controller
         return response()->json($this->formatApp($module, $sub));
     }
 
+    public function appRuntime(Business $business, string $moduleSlug, ModuleRuntimeService $runtime): JsonResponse
+    {
+        $this->authorizeBusiness($business);
+
+        return response()->json([
+            'payload' => $runtime->get($business, $moduleSlug),
+        ]);
+    }
+
     public function index(Business $business): JsonResponse
     {
         $this->authorizeBusiness($business);
@@ -98,7 +113,10 @@ class SubscriptionController extends Controller
     {
         $this->authorizeBusiness($business);
 
-        $module = Module::where('slug', $moduleSlug)->firstOrFail();
+        $module = Module::where('slug', $moduleSlug)
+            ->where('catalog_visible', true)
+            ->where('is_available', true)
+            ->firstOrFail();
 
         $sub = BusinessSubscription::updateOrCreate(
             ['business_id' => $business->id, 'module_id' => $module->id],

@@ -28,7 +28,7 @@ export default function DashboardHome() {
     <div>
       <PageHeader
         title="Inicio"
-        description="Resumen de tu negocio. Activa apps desde el menú lateral o entra en cada una para configurarlas."
+        description="Resumen de tu negocio. Activa apps desde Mi suite o Configuración → Apps."
       />
       <div className="grid gap-5 md:grid-cols-3">
         <div className="card">
@@ -45,7 +45,7 @@ export default function DashboardHome() {
             {balance?.toLocaleString() ?? '—'}
           </p>
         </div>
-        <Link href="/dashboard/settings" className="card transition hover:border-orange-200 hover:shadow-md">
+        <Link href="/dashboard/settings/business" className="card transition hover:border-orange-200 hover:shadow-md">
           <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
             Configuración
           </p>

@@ -2,3 +2,5 @@ packages:
   - "packages/*"
   - "apps/matrix-web"
   - "apps/module-web-uptime"
+  - "apps/module-resenas-gmb"
+  - "apps/module-seo-pipeline"

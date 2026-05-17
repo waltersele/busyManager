@@ -4,20 +4,19 @@ import {
   CATEGORY_ICONS,
   IconChevron,
   IconHome,
-  IconIntegrations,
   IconLeads,
-  IconPlus,
+  IconLock,
   IconSettings,
   IconStore,
-  IconTeam,
-  IconTokens,
 } from '@/components/icons';
 import { api, clearToken, getBusinessId, setBusinessId } from '@/lib/api';
 import {
   AppsSidebarResponse,
+  AppStatus,
   CATEGORY_LABELS,
   SidebarApp,
   SidebarCategory,
+  sortSuiteApps,
 } from '@/lib/modules';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -40,6 +39,60 @@ interface UserData {
   };
 }
 
+function SuiteAppLink({ app, pathname }: { app: SidebarApp; pathname: string }) {
+  const href = `/dashboard/apps/${app.slug}`;
+  const isRouteActive = pathname === href || pathname.startsWith(`${href}/`);
+  const status: AppStatus = app.status;
+
+  if (status === 'coming_soon') {
+    return (
+      <span
+        className="flex cursor-not-allowed items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-400 opacity-60"
+        title="Próximamente"
+      >
+        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-slate-300" />
+        <span className="min-w-0 flex-1 truncate">{app.name}</span>
+        {app.is_free && (
+          <span className="shrink-0 rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold uppercase text-slate-500">
+            Gratis
+          </span>
+        )}
+        <span className="shrink-0 text-[10px] uppercase">Pronto</span>
+      </span>
+    );
+  }
+
+  const isActive = status === 'active';
+  const isInactive = status === 'inactive';
+
+  return (
+    <Link
+      href={href}
+      className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition ${
+        isRouteActive && isActive
+          ? 'bg-orange-50 font-medium text-orange-700'
+          : isRouteActive && isInactive
+            ? 'bg-slate-100 font-medium text-slate-700'
+            : isActive
+              ? 'text-slate-700 hover:bg-slate-50'
+              : 'text-slate-400 hover:bg-slate-50 hover:text-slate-600'
+      } ${isInactive ? 'opacity-70' : ''}`}
+    >
+      {isActive ? (
+        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
+      ) : (
+        <IconLock className="h-3.5 w-3.5 shrink-0 text-slate-400" />
+      )}
+      <span className="min-w-0 flex-1 truncate">{app.name}</span>
+      {app.is_free && (
+        <span className="shrink-0 rounded bg-emerald-50 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-emerald-700">
+          Gratis
+        </span>
+      )}
+    </Link>
+  );
+}
+
 function CategorySection({
   cat,
   expanded,
@@ -50,7 +103,8 @@ function CategorySection({
   onToggle: () => void;
 }) {
   const pathname = usePathname();
-  const activeApps = cat.apps.filter((a) => a.status === 'active');
+  const sortedApps = sortSuiteApps(cat.apps);
+  const activeCount = sortedApps.filter((a) => a.status === 'active').length;
   const CatIcon = CATEGORY_ICONS[cat.id] ?? IconStore;
 
   return (
@@ -62,9 +116,9 @@ function CategorySection({
       >
         <CatIcon className="shrink-0 text-slate-400" />
         <span className="flex-1 truncate">{CATEGORY_LABELS[cat.id] ?? cat.id}</span>
-        {activeApps.length > 0 && (
+        {activeCount > 0 && (
           <span className="rounded-full bg-emerald-100 px-1.5 py-0.5 text-[10px] font-semibold text-emerald-700">
-            {activeApps.length}
+            {activeCount}
           </span>
         )}
         <IconChevron open={expanded} className="shrink-0 text-slate-400" />
@@ -72,40 +126,18 @@ function CategorySection({
 
       {expanded && (
         <div className="ml-2 space-y-0.5 border-l border-slate-100 pl-2">
-          {activeApps.length === 0 ? (
-            <p className="px-3 py-2 text-xs text-slate-400">Sin apps en tu suite</p>
-          ) : (
-            activeApps.map((app) => <ActiveAppLink key={app.slug} app={app} pathname={pathname} />)
-          )}
+          {sortedApps.map((app) => (
+            <SuiteAppLink key={app.slug} app={app} pathname={pathname} />
+          ))}
           <Link
-            href={`/dashboard/catalog?category=${cat.id}`}
-            className="flex items-center gap-2 rounded-lg px-3 py-2 text-xs text-orange-600 hover:bg-orange-50"
+            href="/dashboard/settings/apps"
+            className="mt-1 flex items-center gap-2 rounded-lg px-3 py-1.5 text-[11px] text-slate-400 hover:text-orange-600"
           >
-            <IconPlus className="h-4 w-4" />
-            Explorar {CATEGORY_LABELS[cat.id]?.toLowerCase()}
+            Ver todas las apps
           </Link>
         </div>
       )}
     </div>
-  );
-}
-
-function ActiveAppLink({ app, pathname }: { app: SidebarApp; pathname: string }) {
-  const href = `/dashboard/apps/${app.slug}`;
-  const isActive = pathname === href || pathname.startsWith(`${href}/`);
-
-  return (
-    <Link
-      href={href}
-      className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm ${
-        isActive
-          ? 'bg-orange-50 font-medium text-orange-700'
-          : 'text-slate-700 hover:bg-slate-50'
-      }`}
-    >
-      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
-      <span className="truncate">{app.name}</span>
-    </Link>
   );
 }
 
@@ -124,7 +156,7 @@ export default function AppSidebar() {
       setSidebar(data);
       const initial: Record<string, boolean> = {};
       data.categories.forEach((c) => {
-        initial[c.id] = c.apps.some((a) => a.status === 'active');
+        initial[c.id] = c.apps.some((a) => a.status === 'active') || c.apps.length > 0;
       });
       setExpanded((prev) => ({ ...initial, ...prev }));
     });
@@ -143,13 +175,7 @@ export default function AppSidebar() {
     loadSidebar();
   }, [loadSidebar, pathname]);
 
-  const bottomNav = [
-    { href: '/dashboard/settings', label: 'Configuración', Icon: IconSettings },
-    { href: '/dashboard/catalog', label: 'Tienda de apps', Icon: IconStore },
-    { href: '/dashboard/integrations', label: 'Integraciones', Icon: IconIntegrations },
-    { href: '/dashboard/team', label: 'Equipo', Icon: IconTeam },
-    { href: '/dashboard/tokens', label: 'Tokens IA', Icon: IconTokens },
-  ];
+  const settingsActive = pathname.startsWith('/dashboard/settings');
 
   return (
     <aside className="flex h-screen w-64 shrink-0 flex-col border-r border-slate-200 bg-white">
@@ -215,20 +241,17 @@ export default function AppSidebar() {
       </nav>
 
       <div className="border-t border-slate-100 px-2 py-3">
-        {bottomNav.map(({ href, label, Icon }) => (
-          <Link
-            key={href}
-            href={href}
-            className={`mb-0.5 flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm ${
-              pathname === href || pathname.startsWith(href + '/')
-                ? 'bg-orange-50 font-medium text-orange-700'
-                : 'text-slate-600 hover:bg-slate-50'
-            }`}
-          >
-            <Icon className="shrink-0 opacity-70" />
-            {label}
-          </Link>
-        ))}
+        <Link
+          href="/dashboard/settings/business"
+          className={`mb-0.5 flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm ${
+            settingsActive
+              ? 'bg-orange-50 font-medium text-orange-700'
+              : 'text-slate-600 hover:bg-slate-50'
+          }`}
+        >
+          <IconSettings className="shrink-0 opacity-70" />
+          Configuración
+        </Link>
         <button
           type="button"
           onClick={() => {

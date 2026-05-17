@@ -12,10 +12,12 @@
 ## Clonar el monorepo
 
 ```powershell
-git clone https://github.com/waltersele/busyManager.git
-cd busyManager
+git clone https://github.com/walperezdev/busymanager.git
+cd busymanager
 pnpm install
 ```
+
+Guía paso a paso del primer día: [00-inicio-rapido.md](00-inicio-rapido.md).
 
 ## Arrancar La Matriz (desarrollo)
 
@@ -46,8 +48,8 @@ MySQL en el host: puerto **3307**, usuario `busymanager`, contraseña `secret`.
 
 ## Activar tu módulo y obtener la API key
 
-1. **Dashboard → Tienda** o **Explorar categoría** → busca tu app.
-2. Pulsa **Añadir a mi suite** (o **Añadir gratis**).
+1. **Dashboard → Configuración → Apps** (o **Mi suite** → tu app).
+2. Abre la ficha de tu módulo y pulsa **Activar app**.
 3. La API key (`bm_...`) se muestra **una sola vez**. Guárdala en `.env` de tu módulo:
    ```
    MATRIX_API_URL=http://localhost:8080

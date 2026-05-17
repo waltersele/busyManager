@@ -1,6 +1,14 @@
 # 05 — Panel y experiencia de usuario
 
-El dashboard **matrix-web** es el panel del `org_admin`. Tu módulo puede coexistir de tres formas.
+El dashboard **matrix-web** es el panel del `org_admin`.
+
+## Navegación actual (La Matriz)
+
+- **Mi suite** (sidebar): todas las apps por categoría. Las **inactivas** aparecen atenuadas con candado; al pulsarlas se abre una **landing** de presentación. Las **activas** abren el panel operativo.
+- **Configuración** (sidebar): hub único con **Negocio**, **Apps** (descubrimiento), **Integraciones**, **Equipo** y **Tokens IA**.
+- No hay «tienda» separada en el menú; el descubrimiento está en Configuración → Apps.
+
+Tu módulo puede coexistir de varias formas:
 
 ## 1. Solo worker (sin UI)
 
@@ -50,6 +58,10 @@ Para **digital-signage**, **menu-dinamico**, **seo-pipeline**:
 - No pidas al usuario repetir datos que ya están en settings del negocio.
 - Móvil-first para módulos que el encargado usa en el local (menú, signage).
 
+## Coherencia visual
+
+Si construyes panel o cola de aprobación, sigue la [06 — Guía de estilos](06-guia-estilos.md) y el CSS de referencia [assets/panel-base.css](assets/panel-base.css).
+
 ## Siguiente paso
 
-Elige tu módulo en [modules/](modules/) y sigue su ficha técnica.
+Elige tu módulo en [modules/](modules/) o tu [asignación](asignaciones/) y sigue su ficha técnica.

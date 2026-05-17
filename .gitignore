@@ -16,5 +16,8 @@ dist/
 coverage/
 apps/matrix-api/storage/*.key
 apps/matrix-api/bootstrap/cache/*.php
+apps/matrix-api/storage/framework/views/*.php
+apps/module-web-uptime/data/
 apps/module-web-uptime/storage/*.key
 apps/module-web-uptime/bootstrap/cache/*.php
+**/tsconfig.tsbuildinfo

@@ -2,6 +2,8 @@
 
 Documentación completa para alumnos: **[docs/students/README.md](students/README.md)**
 
+Asignaciones actuales: [docs/students/asignaciones/](students/asignaciones/) · Guía de estilos: [06-guia-estilos.md](students/06-guia-estilos.md)
+
 ## Reglas (resumen)
 
 1. **Nunca** accedas a la base de datos de La Matriz.
@@ -41,11 +43,16 @@ Lee la URL en `settings.web.url` (Dashboard → Configuración). El código de r
 
 Detalle: [docs/students/03-contrato-matriz.md](students/03-contrato-matriz.md).
 
+## Catálogo activo (slugs visibles)
+
+Social, Contenido (`seo-pipeline`, `enlaces-rotos`), Gestión (`voz-gestion`), Monitorización (`web-uptime` con SSL), Visual (próximamente). No desarrollar como apps separadas: `monitor-ssl`, `seo-onpage`, `alerta-posicion-seo`, captación ni el resto de gestión/monitorización retirados.
+
 ## Módulos del curso
 
 | Slug | Documentación |
 |------|----------------|
 | `web-uptime` | [modules/web-uptime.md](students/modules/web-uptime.md) |
+| `enlaces-rotos` | [modules/enlaces-rotos.md](students/modules/enlaces-rotos.md) |
 | `resenas-gmb` | [modules/resenas-gmb.md](students/modules/resenas-gmb.md) |
 | `whatsapp-guardia` | [modules/whatsapp-guardia.md](students/modules/whatsapp-guardia.md) |
 | `voz-gestion` | [modules/voz-gestion.md](students/modules/voz-gestion.md) |

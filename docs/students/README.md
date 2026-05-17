@@ -2,21 +2,34 @@
 
 Guía para desarrollar apps que se integran con **La Matriz** sin tocar su base de datos. Cada módulo es una app independiente en `apps/module-{slug}/`.
 
+**Repositorio:** https://github.com/walperezdev/busymanager
+
 ## Orden de lectura recomendado
 
+0. **[00 — Inicio rápido (primer día)](00-inicio-rapido.md)** ← si empiezas mañana
 1. [01 — Entorno y activación](01-entorno-y-activacion.md)
 2. [02 — Anatomía de un módulo](02-anatomia-de-un-modulo.md)
 3. [03 — Contrato con La Matriz (SDK)](03-contrato-matriz.md)
 4. [04 — Settings y configuración](04-settings-y-config.md)
 5. [05 — Panel y experiencia de usuario](05-panel-y-ux.md)
-6. **Tu módulo** → carpeta [modules/](modules/)
-7. Antes de entregar → [checklist de entrega](appendices/checklist-entrega.md)
+6. [06 — Guía de estilos](06-guia-estilos.md) — paneles y colas de aprobación
+7. **Tu módulo** → carpeta [modules/](modules/)
+8. Antes de entregar → [checklist de entrega](appendices/checklist-entrega.md)
+
+## Asignaciones del curso (2 alumnos)
+
+| Alumno | Módulo | Documento |
+|--------|--------|-----------|
+| Nicolás | Reseñas GMB | [asignaciones/nicolas-resenas-gmb.md](asignaciones/nicolas-resenas-gmb.md) → `apps/module-resenas-gmb/` |
+| Julio | SEO Pipeline / WordPress | [asignaciones/julio-seo-pipeline-wordpress.md](asignaciones/julio-seo-pipeline-wordpress.md) → `apps/module-seo-pipeline/` |
+
+Índice y emails: [asignaciones/README.md](asignaciones/README.md) · [plantilla-email.md](asignaciones/plantilla-email.md)
 
 ## Módulos disponibles en este curso
 
 | # | Módulo | Slug | Dificultad | Doc |
 |---|--------|------|------------|-----|
-| 11 | Web caída | `web-uptime` | Intro | [web-uptime](modules/web-uptime.md) |
+| 11 | Monitor web y SSL | `web-uptime` | Intro | [web-uptime](modules/web-uptime.md) |
 | 3 | Reseñas GMB | `resenas-gmb` | Media | [resenas-gmb](modules/resenas-gmb.md) |
 | 4 | WhatsApp Guardia | `whatsapp-guardia` | Media-alta | [whatsapp-guardia](modules/whatsapp-guardia.md) |
 | 5 | Voz a gestión | `voz-gestion` | Media-alta | [voz-gestion](modules/voz-gestion.md) |
@@ -27,6 +40,14 @@ Guía para desarrollar apps que se integran con **La Matriz** sin tocar su base 
 | 21 | Video en local | `video-local` | Media | [video-local](modules/video-local.md) |
 
 **Recomendación:** empieza por **web-uptime** (referencia implementada en `apps/module-web-uptime`).
+
+### Slugs absorbidos (no desarrollar como apps separadas)
+
+| Slug retirado | Incluido en |
+|---------------|-------------|
+| `monitor-ssl` | `web-uptime` |
+| `seo-onpage` | `seo-pipeline` |
+| `alerta-posicion-seo` | `enlaces-rotos` |
 
 ## Módulos visuales relacionados
 

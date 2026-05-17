@@ -42,6 +42,38 @@ importers:
         specifier: ^5.6.0
         version: 5.9.3
 
+  apps/module-resenas-gmb:
+    dependencies:
+      '@busymanager/matrix-sdk':
+        specifier: workspace:*
+        version: link:../../packages/matrix-sdk
+    devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.19.19
+      tsx:
+        specifier: ^4.19.0
+        version: 4.22.0
+      typescript:
+        specifier: ^5.6.0
+        version: 5.9.3
+
+  apps/module-seo-pipeline:
+    dependencies:
+      '@busymanager/matrix-sdk':
+        specifier: workspace:*
+        version: link:../../packages/matrix-sdk
+    devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.19.19
+      tsx:
+        specifier: ^4.19.0
+        version: 4.22.0
+      typescript:
+        specifier: ^5.6.0
+        version: 5.9.3
+
   apps/module-web-uptime:
     dependencies:
       '@busymanager/matrix-sdk':
