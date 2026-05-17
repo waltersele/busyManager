@@ -76,15 +76,13 @@ Abre http://localhost:3000
 | Contraseña | `password` |
 | Negocio | **Karting Valencia** |
 
-## 6. Tu asignación
+## 6. Qué app te toca
 
-| Alumno | Módulo | Carpeta | Documento |
-|--------|--------|---------|-----------|
-| Nicolás | Reseñas GMB | `apps/module-resenas-gmb/` | [asignaciones/nicolas-resenas-gmb.md](asignaciones/nicolas-resenas-gmb.md) |
-| Julio | SEO Pipeline | `apps/module-seo-pipeline/` | [asignaciones/julio-seo-pipeline-wordpress.md](asignaciones/julio-seo-pipeline-wordpress.md) |
-| Resto del curso | Ver catálogo en el panel | Crear `apps/module-{slug}/` | [README.md](README.md) |
+Te lo dirá el profesor. Las instrucciones están en **[apps/](apps/)** (por ejemplo `resenas-gmb.md`, `seo-pipeline.md`).
 
-Lee **tu** asignación completa antes de escribir código.
+Si empiezas una app sin carpeta aún, sigue **[crear-una-app.md](crear-una-app.md)**.
+
+Índice de todas las apps: [apps/README.md](apps/README.md).
 
 ## 7. Activar tu app y obtener la API key
 

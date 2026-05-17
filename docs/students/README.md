@@ -13,17 +13,17 @@ Guía para desarrollar apps que se integran con **La Matriz** sin tocar su base 
 4. [04 — Settings y configuración](04-settings-y-config.md)
 5. [05 — Panel y experiencia de usuario](05-panel-y-ux.md)
 6. [06 — Guía de estilos](06-guia-estilos.md) — paneles y colas de aprobación
-7. **Tu módulo** → carpeta [modules/](modules/)
-8. Antes de entregar → [checklist de entrega](appendices/checklist-entrega.md)
+7. **Tu app** → [apps/](apps/) (qué entregar) y [modules/](modules/) (ficha técnica)
+8. [Cómo crear tu carpeta de módulo](crear-una-app.md)
+9. Antes de entregar → [checklist de entrega](appendices/checklist-entrega.md)
 
-## Asignaciones del curso (2 alumnos)
+## Apps del curso
 
-| Alumno | Módulo | Documento |
-|--------|--------|-----------|
-| Nicolás | Reseñas GMB | [asignaciones/nicolas-resenas-gmb.md](asignaciones/nicolas-resenas-gmb.md) → `apps/module-resenas-gmb/` |
-| Julio | SEO Pipeline / WordPress | [asignaciones/julio-seo-pipeline-wordpress.md](asignaciones/julio-seo-pipeline-wordpress.md) → `apps/module-seo-pipeline/` |
+El profesor asigna la app; las instrucciones van **por slug**, no por persona.
 
-Índice y emails: [asignaciones/README.md](asignaciones/README.md) · [plantilla-email.md](asignaciones/plantilla-email.md)
+→ **[Índice de apps](apps/README.md)**  
+→ **[Mensajes para enviar a alumnos](mensajes-para-alumnos.md)** (emails listos)  
+→ **[Crear una app](crear-una-app.md)** (paso a paso técnico)
 
 ## Módulos disponibles en este curso
 

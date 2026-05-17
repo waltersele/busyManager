@@ -1,6 +1,6 @@
 /**
  * Worker de sincronización y generación de respuestas.
- * TODO (Nicolás): polling/mock de reseñas, Gemini, cola de aprobación, reglas ≤3★.
+ * TODO: polling/mock de reseñas, Gemini, cola de aprobación, reglas ≤3★.
  */
 import { createMatrixClient } from '@busymanager/matrix-sdk';
 

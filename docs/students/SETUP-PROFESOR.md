@@ -1,63 +1,39 @@
-# Publicar el repo en GitHub (profesor)
+# Publicar y gestionar el repo del curso
 
-Los alumnos deben clonar: **https://github.com/walperezdev/busymanager**
+**Repo:** https://github.com/walperezdev/busymanager (privado)
 
-## Si el push falla con «Repository not found»
+## Subir el código desde tu PC
 
-La máquina de desarrollo puede estar autenticada en otra cuenta de GitHub (p. ej. `waltersele`). El repo debe existir en la cuenta **`walperezdev`** y tu usuario debe tener permiso de escritura.
-
-### 1. Crear el repositorio (cuenta walperezdev)
-
-En https://github.com/new:
-
-- Owner: **walperezdev**
-- Name: **busymanager**
-- Visibility: Public o Private (si es privado, invita a cada alumno como *Collaborator*)
-- **No** marques «Add a README» (dejamos el del proyecto)
-
-### 2. Publicar desde tu PC
-
-Inicia sesión en GitHub CLI con la cuenta correcta:
+La CLI de GitHub en el portátil puede seguir en `waltersele`. Para empujar al repo del curso:
 
 ```powershell
 gh auth login
-gh auth status
-```
+# elige la cuenta walperezdev
 
-Desde la carpeta del proyecto:
-
-```powershell
 cd c:\webProject\busyManager\busyManager
-git remote -v
-# origin debe apuntar a https://github.com/walperezdev/busymanager.git
 git push -u origin main
 ```
 
-Si `origin` no existe:
+O invita a **waltersele** como colaborador en el repo (Write) y haz `git push origin main` sin cambiar de cuenta.
 
-```powershell
-git remote add origin https://github.com/walperezdev/busymanager.git
-git push -u origin main
-```
+## Invitar alumnos
 
-### 3. Invitar alumnos (repo privado)
+Repo privado → **Settings** → **Collaborators** → añadir cada usuario de GitHub.
 
-GitHub → **Settings** → **Collaborators** → añadir el usuario de cada alumno.
+Mándales el enlace al repo y **[00-inicio-rapido.md](00-inicio-rapido.md)**.
 
-### 4. Opcional: proteger `main`
+## Asignar apps
 
-**Settings** → **Branches** → rule en `main`: requerir Pull Request antes de merge.
+No hay hojas por persona. Elige app en [apps/](apps/) y envía el bloque correspondiente de **[mensajes-para-alumnos.md](mensajes-para-alumnos.md)**.
 
 ## Remoto de respaldo
 
-En este clon, `legacy` apunta al repo anterior (`waltersele/busyManager`) por si necesitas sincronizar:
+`legacy` → `waltersele/busyManager` por si quieres una copia en la otra cuenta:
 
 ```powershell
 git push legacy main
 ```
 
-## Enviar emails
+## Proteger main (opcional)
 
-Plantillas listas en [asignaciones/plantilla-email.md](asignaciones/plantilla-email.md).
-
-Cada alumno debe leer primero **[00-inicio-rapido.md](00-inicio-rapido.md)**.
+Branch protection: PR obligatorio antes de merge a `main`.

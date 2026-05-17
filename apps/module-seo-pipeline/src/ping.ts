@@ -32,7 +32,7 @@ async function main() {
     trade_name: settings.identity?.trade_name,
     module_settings: mod,
   });
-  console.log('\nSiguiente: docs/students/asignaciones/julio-seo-pipeline-wordpress.md');
+  console.log('\nSiguiente: docs/students/apps/seo-pipeline.md');
 }
 
 main().catch((err) => {

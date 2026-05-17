@@ -1,25 +1,9 @@
-# Asignaciones de módulos — curso BusyManager
+# Asignaciones
 
-Documentación lista para enviar a cada alumno. Cada asignación incluye alcance, lecturas obligatorias, carpeta de trabajo y criterios de entrega.
+Las hojas de trabajo van **por app**, no por persona. El profesor elige quién hace cada una.
 
-| Alumno | Módulo | Slug | Documento |
-|--------|--------|------|-----------|
-| **Nicolás** | Reseñas GMB (respuestas automáticas) | `resenas-gmb` | [nicolas-resenas-gmb.md](nicolas-resenas-gmb.md) |
-| **Julio** | SEO Pipeline (publicar en WordPress con aprobación) | `seo-pipeline` | [julio-seo-pipeline-wordpress.md](julio-seo-pipeline-wordpress.md) |
+→ **[apps/](../apps/)** — instrucciones de cada aplicación  
+→ **[mensajes-para-alumnos.md](../mensajes-para-alumnos.md)** — textos listos para enviar por email  
+→ **[crear-una-app.md](../crear-una-app.md)** — cómo montar la carpeta del módulo
 
-## Para el profesor
-
-- Plantilla de email: [plantilla-email.md](plantilla-email.md)
-- Guía de estilos compartida: [../06-guia-estilos.md](../06-guia-estilos.md)
-- Checklist común: [../appendices/checklist-entrega.md](../appendices/checklist-entrega.md)
-
-## Repositorio
-
-**https://github.com/walperezdev/busymanager**
-
-Los alumnos trabajan en este monorepo (misma base que La Matriz). Cada uno tiene su carpeta bajo `apps/`:
-
-- `apps/module-resenas-gmb/` — Nicolás
-- `apps/module-seo-pipeline/` — Julio
-
-No deben modificar `apps/matrix-api` ni la base de datos de La Matriz.
+Checklist de entrega: [appendices/checklist-entrega.md](../appendices/checklist-entrega.md)

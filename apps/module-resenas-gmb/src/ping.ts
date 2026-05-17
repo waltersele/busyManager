@@ -31,7 +31,7 @@ async function main() {
     trade_name: settings.identity?.trade_name,
     module_settings: mod,
   });
-  console.log('\nSiguiente: implementar worker y panel según docs/students/asignaciones/nicolas-resenas-gmb.md');
+  console.log('\nSiguiente: docs/students/apps/resenas-gmb.md');
 }
 
 main().catch((err) => {

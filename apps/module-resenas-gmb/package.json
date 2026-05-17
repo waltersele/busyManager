@@ -2,7 +2,7 @@
   "name": "@busymanager/module-resenas-gmb",
   "version": "0.1.0",
   "private": true,
-  "description": "Módulo alumno — Reseñas GMB (Nicolás)",
+  "description": "BusyManager — Reseñas GMB",
   "type": "module",
   "scripts": {
     "ping": "tsx src/ping.ts",

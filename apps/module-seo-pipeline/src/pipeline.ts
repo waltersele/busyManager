@@ -1,6 +1,6 @@
 /**
  * Genera artículo, crea borrador WP y notifica.
- * TODO (Julio): Gemini, WP REST draft, content_approvals, hash SHA-256.
+ * TODO: Gemini, WP REST draft, content_approvals, hash SHA-256.
  */
 import { createMatrixClient } from '@busymanager/matrix-sdk';
 

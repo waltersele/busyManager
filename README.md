@@ -10,8 +10,9 @@ Plataforma multitenant (Agencia → Organización → Negocio) con API central, 
 
 1. **[Inicio rápido — primer día](docs/students/00-inicio-rapido.md)** ← empieza aquí  
 2. [Guía completa alumnos](docs/students/README.md)  
-3. [Cómo colaborar (Git / PRs)](CONTRIBUTING.md)  
-4. [Asignaciones](docs/students/asignaciones/)
+3. [Apps del curso](docs/students/apps/) · [Crear una app](docs/students/crear-una-app.md)  
+4. [Mensajes para alumnos](docs/students/mensajes-para-alumnos.md) (profesor)  
+5. [Cómo colaborar (Git / PRs)](CONTRIBUTING.md)
 
 ## Contexto para Cursor
 
@@ -34,8 +35,8 @@ Al clonar en otro PC, abre el proyecto en Cursor: la regla en `.cursor/rules/` y
 apps/matrix-api/           — API REST La Matriz
 apps/matrix-web/           — Dashboard org_admin
 apps/module-web-uptime/    — Módulo referencia (monitor web + SSL)
-apps/module-resenas-gmb/   — Módulo Nicolás
-apps/module-seo-pipeline/  — Módulo Julio
+apps/module-resenas-gmb/   — App Reseñas Google (esqueleto)
+apps/module-seo-pipeline/  — App SEO Pipeline (esqueleto)
 packages/matrix-sdk/       — SDK TypeScript
 docker/                    — MySQL, Redis, Mailpit, API
 docs/students/             — Documentación del curso
