@@ -4,6 +4,8 @@ Plataforma multitenant (Agencia → Organización → Negocio) con API central, 
 
 **Repositorio del curso:** [github.com/walperezdev/busymanager](https://github.com/walperezdev/busymanager)
 
+> **Profesor:** si el repo aún no está en GitHub, sigue [docs/students/SETUP-PROFESOR.md](docs/students/SETUP-PROFESOR.md). El código ya está commiteado; falta `git push` con la cuenta `walperezdev`.
+
 ## Para alumnos (empezar mañana)
 
 1. **[Inicio rápido — primer día](docs/students/00-inicio-rapido.md)** ← empieza aquí  
