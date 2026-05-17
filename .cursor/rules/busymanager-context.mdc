@@ -20,7 +20,11 @@ Agencia → Organización → **Negocio** (módulos, Provider Connections, leads
 
 ## Producto
 
-Módulos pequeños por categoría (Captación, Social, Contenido, Gestión, Infra, Monitorización). Sidebar solo muestra apps **active**; catálogo muestra todas.
+Catálogo visible: Social, Contenido, Gestión, Monitorización (`web-uptime` + SSL), Visual (próximamente). Sin Captación ni apps absorbidas (`monitor-ssl`, `seo-onpage`, etc.) — flag `catalog_visible` en API.
+
+Repo curso: **https://github.com/walperezdev/busymanager** (privado). Docs alumnos: `docs/students/00-inicio-rapido.md`, `docs/students/apps/`, `docs/students/crear-una-app.md`.
+
+Mi suite: activas primero; Configuración → Apps para descubrir/activar. Sin precios en UI (`SHOW_PRICING = false`).
 
 ## Al implementar
 

@@ -16,7 +16,11 @@ Plataforma multitenant (Agencia → Organización → Negocio) con API central, 
 
 ## Contexto para Cursor
 
-Al clonar en otro PC, abre el proyecto en Cursor: la regla en `.cursor/rules/` y el resumen en [`docs/cursor/CONTEXTO-PROYECTO.md`](docs/cursor/CONTEXTO-PROYECTO.md) recuperan decisiones de arquitectura y producto.
+Al clonar en otro PC, abre el proyecto en Cursor:
+
+- Regla automática: [`.cursor/rules/busymanager-context.mdc`](.cursor/rules/busymanager-context.mdc)
+- Resumen del proyecto: [`docs/cursor/CONTEXTO-PROYECTO.md`](docs/cursor/CONTEXTO-PROYECTO.md)
+- Historial de chats: [`docs/cursor/chat/`](docs/cursor/chat/)
 
 ## Stack
 
